@@ -1,8 +1,0 @@
-<component name="libraryTable">
-  <library name="RequireJS" type="javaScript">
-    <CLASSES>
-      <root url="file://$PROJECT_DIR$/lib/require.js" />
-    </CLASSES>
-    <SOURCES />
-  </library>
-</component>
