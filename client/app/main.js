@@ -1,45 +1,77 @@
-"use strict";
+'use strict';
 
 define(['playcanvas'], function () {
     require(['app/fb-manager']);
+    require(['app/rotate-on-drag']);
 
-// Create a PlayCanvas application
-    var canvas = document.getElementById("application-canvas");
-    var app = new pc.Application(canvas);
-    app.start();
+    var app = createApp();
+    initGround();
+    initCameraNode();
+    initLight();
+    initTestTowers();
 
-// Fill the available space at full resolution
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-
-// Create box entity
-    var cube = new pc.Entity();
-    cube.addComponent("model", {
-        type: "box"
+    app.on('update', function (deltaTime) {
+        //cube.rotate(10 * deltaTime, 20 * deltaTime, 30 * deltaTime);
     });
 
-// Create camera entity
-    var camera = new pc.Entity();
-    camera.addComponent("camera", {
-        clearColor: new pc.Color(0.1, 0.1, 0.1)
-    });
+    // ----- Methods -----
 
-// Create directional light entity
-    var light = new pc.Entity();
-    light.addComponent("light");
+    function createApp() {
+        var canvas = document.getElementById('application-canvas');
+        var app = new pc.Application(canvas);
+        app.start();
+        app.setCanvasFillMode(pc.FILLMODE_KEEP_ASPECT);
+        app.setCanvasResolution(pc.RESOLUTION_AUTO);
+        return app;
+    }
 
-// Add to hierarchy
-    app.root.addChild(cube);
-    app.root.addChild(camera);
-    app.root.addChild(light);
+    function initLight() {
+        var light = new pc.Entity();
+        light.addComponent('light', {
+            castShadows: true,
+            shadowResolution: 1024
+        });
+        light.setEulerAngles(45, -45, 0);
+        app.root.addChild(light);
+    }
 
-// Set up initial positions and orientations
-    camera.setPosition(0, 0, 3);
-    light.setEulerAngles(45, 0, 0);
+    function initCameraNode() {
+        var cameraRoot = new pc.Entity();
+        cameraRoot.addComponent('script', {
+            scripts: [{
+                url: 'app/rotate-on-drag.js'
+            }]
+        });
 
-// Register an update event
-    app.on("update", function (deltaTime) {
-        cube.rotate(10 * deltaTime, 20 * deltaTime, 30 * deltaTime);
-    });
+        var camera = new pc.Entity();
+        camera.addComponent('camera', {
+            clearColor: new pc.Color(0.1, 0.1, 0.1)
+        });
+        cameraRoot.addChild(camera);
+        camera.setPosition(0, 25, 15);
+        camera.setEulerAngles(-60, 0, 0);
 
+        app.root.addChild(cameraRoot);
+    }
+
+    function initGround() {
+        var ground = new pc.Entity();
+        ground.addComponent('model', {
+            type: 'plane'
+        });
+        ground.setLocalScale(20, 1, 20);
+        app.root.addChild(ground);
+    }
+
+    function initTestTowers() {
+        var cube = new pc.Entity();
+        cube.addComponent('model', {
+            type: 'box',
+            castShadows: true,
+            receiveShadows: false
+        });
+        cube.setLocalScale(1,2,1);
+        cube.translateLocal(0,1,0);
+        app.root.addChild(cube);
+    }
 });
