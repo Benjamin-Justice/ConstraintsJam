@@ -35,8 +35,10 @@ public class EnemySpawner : MonoBehaviour
 	private void SpawnEnemy ()
 	{
 		enemiesSpawnedInCurrentWave++;
-		GameObject enemy = (GameObject)Object.Instantiate (CurrentWave.EnemyPrefab, this.transform.position, Quaternion.identity);
-		enemy.GetComponent <NavMeshAgent> ().SetDestination (EnemyFinishLocation.position);
+		GameObject enemy = (GameObject)Object.Instantiate (CurrentWave.EnemyPrefab, this.transform.position, this.transform.rotation);
+		var navMeshAgent = enemy.GetComponent<NavMeshAgent> ();
+		navMeshAgent.updateRotation = true;
+		navMeshAgent.SetDestination (EnemyFinishLocation.position);
 		if (enemiesSpawnedInCurrentWave >= CurrentWave.EnemyCount) {
 			WaveComplete ();
 		}
