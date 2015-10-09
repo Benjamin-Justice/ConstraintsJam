@@ -1,0 +1,32 @@
+<project name="ASymcTDServer" basedir="." default="default">
+
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="war"/>
+    <path id="compile.classpath">
+        <fileset dir="${build.dir}/WEB-INF/lib">
+            <include name="**/*.jar"/>
+            <include name="**/*.xml"/>
+        </fileset>
+    </path>
+    <target name="default" depends="buildwar,deploy" />
+
+    <target name="buildwar">
+        <!-- Rename to whatever you like-->
+        <war basedir="war" destfile="AsyncTDServer.war" webxml="war/WEB-INF/web.xml">
+            <exclude name="WEB-INF/**"/>
+            <webinf dir="war/WEB-INF/">
+                <include name="**/*.jar"/>
+                <include name="**/classes/**"/>
+            </webinf>
+        </war>
+    </target>
+
+    <target name="deploy">
+        <!-- Use the same name again -->
+        <copy file="AsyncTDServer.war" todir="."/>
+        <exec executable="scp" >
+            <arg value="AsyncTDServer.war" />
+            <arg value="aleron:~/aleron/tomcat/webapps"/>
+        </exec>
+    </target>
+</project>
