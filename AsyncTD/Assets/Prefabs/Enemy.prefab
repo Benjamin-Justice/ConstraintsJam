@@ -721,6 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84178985d43e4bdc8e2f7a60942bb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 9540220}
 --- !u!135 &13598488
 SphereCollider:
   m_ObjectHideFlags: 1
