@@ -66,7 +66,7 @@ public class AttackEnemiesInRange : MonoBehaviour
 		EnemyHealth otherEnemy = other.GetComponent<EnemyHealth> ();
 		if (otherEnemy != null) {
 			enemiesInRange.Add (otherEnemy);
-			Debug.Log ("Added " + otherEnemy.gameObject.name);
+			//Debug.Log ("Added " + otherEnemy.gameObject.name);
 		}
 	}
 
@@ -75,7 +75,7 @@ public class AttackEnemiesInRange : MonoBehaviour
 		EnemyHealth otherEnemy = other.GetComponent<EnemyHealth> ();
 		if (otherEnemy != null) {
 			enemiesInRange.Remove (otherEnemy);
-			Debug.Log ("Removed " + otherEnemy.gameObject.name);
+			//Debug.Log ("Removed " + otherEnemy.gameObject.name);
 		}
 	}
 }

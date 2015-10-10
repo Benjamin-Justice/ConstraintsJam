@@ -2,14 +2,12 @@
 using System.Collections;
 
 public class EnemyFinish : MonoBehaviour {
+	public Lives lives;
+	void OnTriggerEnter (Collider other)
+	{
+		if (other.GetComponent<EnemyHealth> () != null) {
+			lives.Remaining--;
+		}
+	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

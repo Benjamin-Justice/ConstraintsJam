@@ -11,12 +11,6 @@ public class DestroyAtEnemyFinish : MonoBehaviour
 		navAgent.updateRotation = true;
 	}
 	
-	// Update is called once per frame
-	void Update ()
-	{
-	
-	}
-
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.GetComponent<EnemyFinish> () != null) {
