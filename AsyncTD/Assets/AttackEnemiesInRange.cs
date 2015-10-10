@@ -12,11 +12,15 @@ public class AttackEnemiesInRange : MonoBehaviour
 	{
 		enemiesInRange = new List<EnemyHealth> ();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+	void FixedUpdate ()
 	{
-		enemiesInRange.ForEach ((enemy) => enemy.Health -= 1);
+		if (enemiesInRange.Count > 0) {
+			enemiesInRange [0].Health -= 1;
+			if (enemiesInRange [0].Health <= 0) {
+				enemiesInRange.Remove (enemiesInRange [0]);
+			}
+		}
 	}
 
 	void OnTriggerEnter (Collider other)

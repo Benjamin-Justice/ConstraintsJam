@@ -4,6 +4,7 @@ using System.Collections;
 [RequireComponent (typeof(NavMeshAgent))]
 public class EnemyHealth : MonoBehaviour
 {
+	[SerializeField]
 	private int health = 100;
 	public Animator animator;
 
