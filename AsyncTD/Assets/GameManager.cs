@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 	public EnemySpawner spawner;
 	public Lives lives;
 	bool running = false;
-	void Start () {
+
+	void Start ()
+	{
 	
 	}
-	
-	void Update () {
-		if(!running && Input.GetKeyDown(KeyCode.Space)){
+
+	void Update ()
+	{
+		if (!running && Input.GetKeyDown (KeyCode.Space)) {
 			StartGame ();
 		}
 	}
@@ -19,7 +23,7 @@ public class GameManager : MonoBehaviour {
 	{
 		running = true;
 		spawner.Reset ();
-		lives.Reset();
+		lives.Reset ();
 		spawner.gameObject.SetActive (true);
 	}
 
@@ -30,7 +34,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Win ()
-	{Debug.Log ("You win");
+	{
+		Debug.Log ("You win");
 		cleanUp ();
 	}
 

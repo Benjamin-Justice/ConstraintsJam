@@ -176,7 +176,7 @@ Transform:
   m_Children:
   - {fileID: 406128}
   m_Father: {fileID: 437556}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &421394
 Transform:
   m_ObjectHideFlags: 1
@@ -213,8 +213,8 @@ Transform:
   m_Children:
   - {fileID: 432150}
   - {fileID: 499030}
-  - {fileID: 477904}
   - {fileID: 414950}
+  - {fileID: 477904}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &468354
@@ -241,7 +241,7 @@ Transform:
   m_Children:
   - {fileID: 468354}
   m_Father: {fileID: 437556}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &499030
 Transform:
   m_ObjectHideFlags: 1
@@ -480,11 +480,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 101162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80ca7646bef214c5895b80d38f5678b0, type: 3}
+  m_Script: {fileID: 11500000, guid: c920fabf876ea48f6951631f3b2d9665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradeTargets:
-  - {fileID: 118614}
+  UpgradeTarget: {fileID: 118614}
 --- !u!114 &11409158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -601,12 +600,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 147274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80ca7646bef214c5895b80d38f5678b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6da039e5c92d44a4a82ef707c60cc158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradeTargets:
-  - {fileID: 101162}
-  - {fileID: 106796}
+  BuildableTowers:
+  - towerType: 0
+    towerObject: {fileID: 101162}
+  - towerType: 1
+    towerObject: {fileID: 106796}
 --- !u!114 &11487162
 MonoBehaviour:
   m_ObjectHideFlags: 1
