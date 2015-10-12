@@ -48,7 +48,6 @@ public class UpgradeSelectedViaHotkey : MonoBehaviour
 				BuildSlot buildSlot = currentSelection.GetComponent<BuildSlot> ();
 				if (buildSlot != null) {
 					newSelection = buildSlot.Build (commandToTowerType [command]);
-
 				}
 			}
 			selectionManager.Select (newSelection);
