@@ -9,13 +9,12 @@ public class AttackTarget : MonoBehaviour {
 	private float delta;
 	private LayerMask mask;
 	public GameObject Muzzle;
-	// Use this for initialization
+	public ParticleSystem bulletParticleSytem;
 	void Start () {
 		delta = AttackRate;
 		mask = GetComponent<SelectTarget> ().mask;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		delta -= Time.deltaTime;
 		if (delta > 0) {
@@ -26,9 +25,10 @@ public class AttackTarget : MonoBehaviour {
 			return;
 		}
 		Muzzle.transform.LookAt (Target.gameObject.transform.position);
-		GetComponentInChildren<ParticleSystem> ().Play ();
+		bulletParticleSytem.Play ();
 		if (Splash >0) {
 			Collider[] hitColliders =Physics.OverlapSphere (Target.gameObject.transform.position, Splash, mask);
+			Debug.DrawLine (Target.gameObject.transform.position, Target.gameObject.transform.position + Vector3.left,Color.green,1f);
 			foreach (Collider hitCollider in hitColliders) {
 				EnemyHealth subtarget = hitCollider.gameObject.GetComponent<EnemyHealth> ();
 				attackTarget (subtarget);
