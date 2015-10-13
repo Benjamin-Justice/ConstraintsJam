@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Lives : MonoBehaviour {
+public class Lives : MonoBehaviour
+{
 	public int StartAmount;
 	private int remaining = 10;
-	public GameManager gameManager;
+
 	public int Remaining {
 		get {
 			return remaining;
@@ -13,10 +14,15 @@ public class Lives : MonoBehaviour {
 		set {
 			this.remaining = value;
 			if (remaining <= 0) {
-				gameManager.Lose ();
+				OnZeroLives ();
 			}
 		}
 	}
+
+	public delegate void OnZeroLivesDelegate ();
+
+	public OnZeroLivesDelegate OnZeroLives = delegate {
+	};
 
 	public void Reset ()
 	{

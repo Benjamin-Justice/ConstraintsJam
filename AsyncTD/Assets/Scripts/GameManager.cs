@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(Lives))]
 public class GameManager : MonoBehaviour
 {
 	public EnemySpawner spawner;
-	public Lives lives;
+	private Lives lives;
 	bool running = false;
 
-	void Start ()
+	void Awake ()
 	{
-	
+		lives = GetComponent<Lives> ();
+		lives.OnZeroLives += Lose;
 	}
 
 	void Update ()

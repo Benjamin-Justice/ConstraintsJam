@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
 	private float timeSinceSpawn = 0f;
 	private int enemiesSpawnedInCurrentWave = 0;
 	private bool fullySpawned;
+
 	private EnemyWave CurrentWave {
 		get {
 			return EnemyWaves [waveNumber];

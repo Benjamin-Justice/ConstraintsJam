@@ -38,7 +38,7 @@ public class UpgradeSelectedViaHotkey : MonoBehaviour
 		}
 		if (command != CommandType.NONE) {
 			if (selectionManager.currentSelectedObject == null) {
-				Debug.Log("Can't build, nothing selected.");
+				Debug.Log ("Can't build, nothing selected.");
 				return;
 			}
 			GameObject currentSelection = selectionManager.currentSelectedObject;
