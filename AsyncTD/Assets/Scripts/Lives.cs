@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Lives : MonoBehaviour
+public static class Lives
 {
-	public int StartAmount;
-	private int remaining = 10;
+	private static int remaining = 10;
 
-	public int Remaining {
+	public static int Remaining {
 		get {
 			return remaining;
 		}
 
 		set {
-			this.remaining = value;
+			remaining = value;
 			if (remaining <= 0) {
 				OnZeroLives ();
 			}
@@ -21,11 +20,6 @@ public class Lives : MonoBehaviour
 
 	public delegate void OnZeroLivesDelegate ();
 
-	public OnZeroLivesDelegate OnZeroLives = delegate {
+	public static OnZeroLivesDelegate OnZeroLives = delegate {
 	};
-
-	public void Reset ()
-	{
-		Remaining = StartAmount;
-	}
 }

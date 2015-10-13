@@ -1,32 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof(Lives))]
 public class GameManager : MonoBehaviour
 {
 	public EnemySpawner spawner;
-	private Lives lives;
-	bool running = false;
+	public GameObject TowerPositions;
+	public int StartLivesAmount;
+	public int StartGoldAmount;
+	GameState gameState;
 
 	void Awake ()
 	{
-		lives = GetComponent<Lives> ();
-		lives.OnZeroLives += Lose;
+		gameState = GameState.PRESETUP;
+		Lives.OnZeroLives += Lose;
+		ResetGame ();
+	}
+
+	void ResetGame ()
+	{
+		Lives.Remaining = StartLivesAmount;
+		Gold.StartAmount = StartGoldAmount;
+		resetTowerPositions ();
+		spawner.Reset ();
+		gameState = GameState.SETUP;
 	}
 
 	void Update ()
 	{
-		if (!running && Input.GetKeyDown (KeyCode.Space)) {
+		if (gameState.Equals (GameState.SETUP) && Input.GetKeyDown (KeyCode.Space)) {
 			StartGame ();
+		}
+		if (gameState.Equals (GameState.FINISHED) && Input.GetKeyDown (KeyCode.Space)) {
+			ResetGame ();
 		}
 	}
 
 	void StartGame ()
 	{
-		running = true;
-		spawner.Reset ();
-		lives.Reset ();
+		gameState = GameState.RUNNING;
 		spawner.gameObject.SetActive (true);
+
+	}
+
+	void resetTowerPositions ()
+	{
+		foreach (Transform tower in TowerPositions.transform) {
+			foreach (Transform part in tower.transform) {
+				if (part.GetComponent<BuildSlot> () != null) {
+					part.gameObject.SetActive (true);
+				} else {
+					part.gameObject.SetActive (false);
+				}
+			}
+		}
 	}
 
 	public void Lose ()
@@ -43,11 +69,10 @@ public class GameManager : MonoBehaviour
 
 	void cleanUp ()
 	{
-		running = false;
+		gameState = GameState.FINISHED;
 		spawner.gameObject.SetActive (false);
 		foreach (Transform child in spawner.gameObject.transform) {
 			Object.Destroy (child.gameObject);
 		}
-		//TODO reset tower attack things
 	}
 }

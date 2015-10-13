@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(OnDestroyDelegateHolder))]
 public class DestroyAtEnemyFinish : MonoBehaviour
 {
-	  
-	// Use this for initialization
 	void Start ()
 	{
 		NavMeshAgent navAgent = this.GetComponent<NavMeshAgent> ();
@@ -14,6 +13,7 @@ public class DestroyAtEnemyFinish : MonoBehaviour
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.GetComponent<EnemyFinish> () != null) {
+			this.GetComponent<OnDestroyDelegateHolder> ().OnEnemyDestroy ();
 			Object.Destroy (this.gameObject);
 		}
 	}

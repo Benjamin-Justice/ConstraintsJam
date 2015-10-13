@@ -5,17 +5,17 @@ public class BuildSlot : MonoBehaviour
 {
 	public BuildableTower[] BuildableTowers;
 
-	void Start ()
-	{
-
-	}
-
 	public GameObject Build (TowerType requestedType)
 	{
-		GameObject requestedTowerObject = 
-			Array.Find (BuildableTowers, (tower) => tower.towerType == requestedType).towerObject;
-		requestedTowerObject.SetActive (true);
-		gameObject.SetActive (false);
-		return requestedTowerObject;
+		BuildableTower requestedTowerBlueprint = 
+			Array.Find (BuildableTowers, (tower) => tower.towerType == requestedType);
+		if (Gold.useGold (requestedTowerBlueprint.cost)) {
+			requestedTowerBlueprint.towerObject.SetActive (true);
+			gameObject.SetActive (false);
+			return requestedTowerBlueprint.towerObject;
+		} else {
+			Debug.Log ("Moar gold is required");
+			return this.gameObject;
+		}
 	}
 }

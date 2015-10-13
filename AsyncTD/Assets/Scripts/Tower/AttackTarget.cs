@@ -37,7 +37,6 @@ public class AttackTarget : MonoBehaviour
 				EnemyHealth subtarget = hitCollider.gameObject.GetComponent<EnemyHealth> ();
 				attackTarget (subtarget);
 			}
-
 		} else {
 			attackTarget (Target);
 		}

@@ -2,6 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof(NavMeshAgent))]
+[RequireComponent (typeof(OnDestroyDelegateHolder))]
 public class EnemyHealth : MonoBehaviour
 {
 	[SerializeField]
@@ -26,20 +27,9 @@ public class EnemyHealth : MonoBehaviour
 		}
 	}
 
-	// Use this for initialization
-	void Start ()
-	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
-
 	public void onDeathAnimationComplete ()
 	{
+		this.GetComponent<OnDestroyDelegateHolder> ().OnEnemyDestroy ();
 		Object.Destroy (this.gameObject);
 	}
 }

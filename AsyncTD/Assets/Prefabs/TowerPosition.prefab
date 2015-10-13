@@ -804,8 +804,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173692}
-  m_LocalRotation: {x: .0405382961, y: 0, z: 0, w: .999177992}
-  m_LocalPosition: {x: 0, y: 2.07999992, z: .00600000005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.07999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 460004}
@@ -1329,7 +1329,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 208776abd985c49f0b679ec0236a0bf0, type: 2}
+  - {fileID: 2100000, guid: bc782efa0568d4fefa9352b065a47899, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1561,6 +1561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeTarget: {fileID: 126030}
+  cost: 2
 --- !u!114 &11429652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1573,6 +1574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeTarget: {fileID: 120718}
+  cost: 4
 --- !u!114 &11434098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1616,9 +1618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397cae1e7e0fe405f820cfdef543b1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 30
+  Damage: 10
   Splash: 0
-  AttackRate: .200000003
+  AttackRate: 1
   Target: {fileID: 0}
   Muzzle: {fileID: 173692}
   bulletParticleSytem: {fileID: 19862948}
@@ -1667,8 +1669,10 @@ MonoBehaviour:
   BuildableTowers:
   - towerType: 0
     towerObject: {fileID: 140248}
+    cost: 1
   - towerType: 1
     towerObject: {fileID: 198978}
+    cost: 1
 --- !u!114 &11479264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1713,6 +1717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeTarget: {fileID: 191820}
+  cost: 3
 --- !u!114 &11490126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6076,7 +6081,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: .5
+      scalar: .200000003
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6236,7 +6241,7 @@ ParticleSystem:
         rgba: 4278386432
       minMaxState: 0
     startSize:
-      scalar: .100000001
+      scalar: .0500000007
       maxCurve:
         serializedVersion: 2
         m_Curve:

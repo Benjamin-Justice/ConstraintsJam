@@ -3,16 +3,17 @@
 public class Upgradeable : MonoBehaviour
 {
 	public GameObject UpgradeTarget;
-
-	void Start ()
-	{
-
-	}
+	public int cost;
 
 	public GameObject Upgrade ()
 	{
-		UpgradeTarget.SetActive (true);
-		gameObject.SetActive (false);
-		return UpgradeTarget;
+		if (Gold.useGold (cost)) {
+			UpgradeTarget.SetActive (true);
+			gameObject.SetActive (false);
+			return UpgradeTarget;
+		} else {
+			Debug.Log ("More Gold is required");
+			return this.gameObject;
+		}
 	}
 }
