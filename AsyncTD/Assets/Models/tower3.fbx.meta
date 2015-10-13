@@ -32,6 +32,8 @@ ModelImporter:
     4300004: Torus.001
     4300006: Icosphere.004
     4300008: Icosphere.005
+    6400000: Icosphere.004
+    6400002: Icosphere.005
   materials:
     importMaterials: 1
     materialName: 0

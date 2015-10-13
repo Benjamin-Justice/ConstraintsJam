@@ -17,6 +17,8 @@ ModelImporter:
     3300002: Icosphere.003
     4300000: Icosphere.002
     4300002: Icosphere.003
+    6400000: Icosphere.002
+    6400002: Icosphere.003
   materials:
     importMaterials: 1
     materialName: 0

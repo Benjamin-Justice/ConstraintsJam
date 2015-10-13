@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [RequireComponent (typeof(SelectionManager))]
 public class UpgradeSelectedViaHotkey : MonoBehaviour
 {
-	public SelectionManager selectionManager;
+	private SelectionManager selectionManager;
 	public Dictionary<CommandType, TowerType> commandToTowerType;
 
 	void Start ()
@@ -21,6 +21,7 @@ public class UpgradeSelectedViaHotkey : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		
 		CommandType command = CommandType.NONE;
 		//TODO better input
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
@@ -36,6 +37,10 @@ public class UpgradeSelectedViaHotkey : MonoBehaviour
 			command = CommandType.UPGRADE;
 		}
 		if (command != CommandType.NONE) {
+			if (selectionManager.currentSelectedObject == null) {
+				Debug.Log("Can't build, nothing selected.");
+				return;
+			}
 			GameObject currentSelection = selectionManager.currentSelectedObject;
 			GameObject newSelection = currentSelection;
 			if (command == CommandType.UPGRADE) {
