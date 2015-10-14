@@ -124,7 +124,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 189178, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_Name
@@ -338,7 +338,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 189178, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_Name
@@ -446,7 +446,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 189178, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_Name
@@ -674,7 +674,7 @@ GameObject:
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1638116407661442457, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -692,7 +692,7 @@ MonoBehaviour:
   spawner: {fileID: 810955346}
   TowerPositions: {fileID: 1789122557}
   StartLivesAmount: 10
-  StartGoldAmount: 2
+  StartGoldAmount: 200
 --- !u!4 &406827482
 Transform:
   m_ObjectHideFlags: 0
@@ -700,7 +700,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 406827480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.855503082, y: -.160996914, z: -.659601212}
+  m_LocalPosition: {x: -6, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -831,7 +831,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_LocalScale.y
@@ -882,14 +882,9 @@ MonoBehaviour:
   gameManager: {fileID: 406827481}
   EnemyFinishLocation: {fileID: 1503372985}
   EnemyWaves:
-  - EnemyCount: 10
+  - EnemyCount: 20
     EnemyPrefab: {fileID: 142874, guid: 011f7ce41ad9742d2a57a50f067951eb, type: 2}
-    Interval: 1
-    GoldReward: 2
-    DeathCount: 0
-  - EnemyCount: 10
-    EnemyPrefab: {fileID: 142874, guid: 011f7ce41ad9742d2a57a50f067951eb, type: 2}
-    Interval: .100000001
+    Interval: .5
     GoldReward: 2
     DeathCount: 0
 --- !u!4 &810955347
@@ -1261,7 +1256,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 189178, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_Name
@@ -1503,7 +1498,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 189178, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_Name
@@ -1557,7 +1552,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 189178, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_Name
@@ -1601,16 +1596,16 @@ Transform:
   m_Children:
   - {fileID: 749492535}
   - {fileID: 280241547}
-  - {fileID: 1765669574}
   - {fileID: 257210441}
+  - {fileID: 1765669574}
   - {fileID: 383323788}
-  - {fileID: 1464673525}
   - {fileID: 2133284818}
-  - {fileID: 303128761}
+  - {fileID: 1464673525}
   - {fileID: 1674776731}
-  - {fileID: 2115450163}
   - {fileID: 718777689}
+  - {fileID: 303128761}
   - {fileID: 2731038}
+  - {fileID: 2115450163}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!1001 &2007122378
@@ -1712,7 +1707,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 189178, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_Name
@@ -1766,7 +1761,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437556, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 189178, guid: 7be149697cbb24e6691c8b47319e135a, type: 2}
       propertyPath: m_Name

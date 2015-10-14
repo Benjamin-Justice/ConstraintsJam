@@ -17,4 +17,15 @@ public class DestroyAtEnemyFinish : MonoBehaviour
 			Object.Destroy (this.gameObject);
 		}
 	}
+
+	void UpdateA ()
+	{
+		NavMeshAgent navAgent = this.GetComponent<NavMeshAgent> ();
+		string a = "";
+		foreach (Vector3 corner in navAgent.path.corners) {
+			a += corner + " ";
+			Debug.DrawRay (corner, Vector3.up);
+		}
+		Debug.Log (a);
+	}
 }

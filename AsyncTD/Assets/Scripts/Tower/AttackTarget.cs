@@ -7,6 +7,7 @@ public class AttackTarget : MonoBehaviour
 	public int Damage = 1;
 	public float Splash = 1;
 	public float AttackRate = 1;
+	public float SlowTime = 1;
 	public EnemyHealth Target;
 	private float currentCooldownRemaining;
 	private LayerMask mask;
@@ -47,6 +48,9 @@ public class AttackTarget : MonoBehaviour
 	{
 		if (Damage != 0) {
 			target.Health -= Damage;
+		}
+		if (SlowTime > 0) {
+			target.gameObject.GetComponent<Slow> ().DebuffTime = SlowTime;
 		}
 	}
 }
