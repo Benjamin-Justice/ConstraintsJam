@@ -2,10 +2,10 @@
 using System.Collections;
 
 [RequireComponent (typeof(NavMeshAgent))]
-public class Slow : MonoBehaviour
+public class ChangeSpeed : MonoBehaviour
 {
 	private NavMeshAgent navMeshAgent;
-	public float slow;
+	public float RatioOfOriginalSpeed;
 	private float debuffTime;
 
 	public float DebuffTime {
@@ -29,7 +29,7 @@ public class Slow : MonoBehaviour
 	{
 		navMeshAgent = GetComponent<NavMeshAgent> ();
 		originalSpeed = navMeshAgent.speed;
-		slowedSpeed = originalSpeed * slow;
+		slowedSpeed = originalSpeed * RatioOfOriginalSpeed;
 	}
 
 	void OnEnable ()

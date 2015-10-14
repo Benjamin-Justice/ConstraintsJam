@@ -50,7 +50,7 @@ public class AttackTarget : MonoBehaviour
 			target.Health -= Damage;
 		}
 		if (SlowTime > 0) {
-			target.gameObject.GetComponent<Slow> ().DebuffTime = SlowTime;
+			target.gameObject.GetComponent<ChangeSpeed> ().DebuffTime = SlowTime;
 		}
 	}
 }

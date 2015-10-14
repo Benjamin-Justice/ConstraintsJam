@@ -18,14 +18,14 @@ public class SelectTarget : MonoBehaviour
 		weapon = GetComponent<AttackTarget> ();
 	}
 
-	static float distanceToCorner (EnemyHealth arg)
+	static float distanceToCorner (EnemyHealth enemyHealth)
 	{
-		return Vector3.Distance (arg.gameObject.GetComponent<NavMeshAgent> ().path.corners [0], arg.gameObject.GetComponent<NavMeshAgent> ().path.corners [1]);
+		return Vector3.Distance (enemyHealth.gameObject.GetComponent<NavMeshAgent> ().path.corners [0], enemyHealth.gameObject.GetComponent<NavMeshAgent> ().path.corners [1]);
 	}
 
-	static int pathLength (EnemyHealth arg)
+	static int pathLength (EnemyHealth enemyHealth)
 	{
-		return arg.gameObject.GetComponent<NavMeshAgent> ().path.corners.Length;
+		return enemyHealth.gameObject.GetComponent<NavMeshAgent> ().path.corners.Length;
 	}
 
 	void FixedUpdate ()
@@ -38,13 +38,13 @@ public class SelectTarget : MonoBehaviour
 		EnemyHealth target = null;
 		switch (mode) {
 		case TargetSelectionMode.FIRST:
-			int minLength = enemiesInRange.Min (arg => pathLength (arg));
-			List<EnemyHealth> nearest = enemiesInRange.FindAll ((EnemyHealth arg) => pathLength (arg) == minLength);				
+			int lowestCornerCount = enemiesInRange.Min (enemyHealth => pathLength (enemyHealth));
+			List<EnemyHealth> nearest = enemiesInRange.FindAll ((EnemyHealth enemyHealth) => pathLength (enemyHealth) == lowestCornerCount);				
 			target = nearest.Aggregate ((EnemyHealth oldItem, EnemyHealth newItem) => distanceToCorner (oldItem) < distanceToCorner (newItem) ? oldItem : newItem);
 			break;
 		case TargetSelectionMode.LAST:
-			int maxLength = enemiesInRange.Max (arg => pathLength (arg));
-			List<EnemyHealth> furthest = enemiesInRange.FindAll ((EnemyHealth arg) => pathLength (arg) == maxLength);				
+			int highestCornerCount = enemiesInRange.Max (enemyHealth => pathLength (enemyHealth));
+			List<EnemyHealth> furthest = enemiesInRange.FindAll ((EnemyHealth arg) => pathLength (arg) == highestCornerCount);				
 			target = furthest.Aggregate ((EnemyHealth oldItem, EnemyHealth newItem) => distanceToCorner (oldItem) > distanceToCorner (newItem) ? oldItem : newItem);
 			break;
 		case TargetSelectionMode.HIGH_HP:

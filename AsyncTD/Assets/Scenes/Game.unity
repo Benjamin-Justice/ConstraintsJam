@@ -705,6 +705,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!1001 &469500703
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 442860, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.98451567
+      objectReference: {fileID: 0}
+    - target: {fileID: 442860, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.61663628
+      objectReference: {fileID: 0}
+    - target: {fileID: 442860, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5.22945786
+      objectReference: {fileID: 0}
+    - target: {fileID: 442860, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 442860, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 442860, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 442860, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 442860, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &669122716
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,8 +925,18 @@ MonoBehaviour:
   EnemyFinishLocation: {fileID: 1503372985}
   EnemyWaves:
   - EnemyCount: 20
-    EnemyPrefab: {fileID: 142874, guid: 011f7ce41ad9742d2a57a50f067951eb, type: 2}
+    EnemyPrefab: {fileID: 181744, guid: 63d4328ab5c0d47a8a4af6327a978ee7, type: 2}
     Interval: .5
+    GoldReward: 2
+    DeathCount: 0
+  - EnemyCount: 5
+    EnemyPrefab: {fileID: 101490, guid: 3e3fb0a21f73d4ae093c9eea6d888c83, type: 2}
+    Interval: 2
+    GoldReward: 2
+    DeathCount: 0
+  - EnemyCount: 10
+    EnemyPrefab: {fileID: 131606, guid: 0563c44812634469ea36127b30afed09, type: 2}
+    Interval: 1
     GoldReward: 2
     DeathCount: 0
 --- !u!4 &810955347
