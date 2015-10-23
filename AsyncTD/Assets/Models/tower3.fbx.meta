@@ -22,11 +22,13 @@ ModelImporter:
     2300004: Torus.001
     2300006: Icosphere.004
     2300008: Icosphere.005
+    2300010: //RootNode
     3300000: Icosphere.006
     3300002: Icosphere.007
     3300004: Torus.001
     3300006: Icosphere.004
     3300008: Icosphere.005
+    3300010: //RootNode
     4300000: Icosphere.006
     4300002: Icosphere.007
     4300004: Torus.001
