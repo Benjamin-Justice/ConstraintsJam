@@ -1,6 +1,6 @@
 package com.brutalhack.asynctd.server;
 
-import com.brutalhack.asynctd.server.model.Round;
+import com.brutalhack.asynctd.server.model.*;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -16,19 +16,19 @@ public class DatabaseAdapterSingleton {
             "FROM asynctd.game " +
             "WHERE fbid = ? " +
             "OR parent = (Select id from asynctd.game WHERE fbid = ?) " +
-            "AND fbid = ?" +
+            "AND fbid = ? " +
             "OR parent = (Select id from asynctd.game WHERE fbid = ?) " +
-            "AND fbid = ?" +
+            "AND fbid = ? " +
             "OR parent = (Select id from asynctd.game WHERE fbid = ?) " +
-            "AND fbid = ?" +
+            "AND fbid = ? " +
             "OR parent = (Select id from asynctd.game WHERE fbid = ?) " +
-            "AND fbid = ?" +
+            "AND fbid = ? " +
             "OR parent = (Select id from asynctd.game WHERE fbid = ?) " +
-            "AND fbid = ?" +
+            "AND fbid = ? " +
             "OR parent = (Select id from asynctd.game WHERE fbid = ?) " +
-            "AND fbid = ?" +
+            "AND fbid = ? " +
             "OR parent = (Select id from asynctd.game WHERE fbid = ?) " +
-            "AND fbid = ?" +
+            "AND fbid = ? " +
             "ORDER BY depth DESC";
     private static final String GET_PARENT_SQL = "SELECT id, depth  " +
             "            FROM asynctd.game  " +
@@ -49,6 +49,10 @@ public class DatabaseAdapterSingleton {
             "            AND fbid = ? " +
             "            ORDER BY depth DESC" +
             "             LIMIT 1";
+    private static final String GET_WAVES_SQL = "SELECT type, count, interval, hp " +
+            "FROM asynctd.wave " +
+            "WHERE number = ? " +
+            "ORDER BY number ASC";
     private static final String INSERT_ROUND_SQL =
             "INSERT INTO asynctd.game (fbid,parent,depth,action) VALUES(?,?,?,?)";
     private static DatabaseAdapterSingleton instance;
@@ -56,6 +60,7 @@ public class DatabaseAdapterSingleton {
     private PreparedStatement getGameStatement;
     private final PreparedStatement getParentStatement;
     private final PreparedStatement insertRoundStatement;
+    private final PreparedStatement getWavesStatement;
 
     public static synchronized DatabaseAdapterSingleton getInstance() {
         if (instance == null) {
@@ -69,17 +74,50 @@ public class DatabaseAdapterSingleton {
         try {
             getGameStatement = connection.prepareStatement(
                     GET_GAME_SQL);
-            System.out.println(getGameStatement);
             getParentStatement = connection.prepareStatement(GET_PARENT_SQL);
-            System.out.println(getParentStatement);
             insertRoundStatement = connection.prepareStatement(INSERT_ROUND_SQL);
-            System.out.println(insertRoundStatement);
+            getWavesStatement = connection.prepareStatement(GET_WAVES_SQL);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public synchronized Round getRound(List<String> ids) {
+    public synchronized History getHistory(List<String> ids) {
+        Round round = getRound(ids);
+        Enemies enemies = getEnemies(ids.size());
+        History history = new History();
+        history.setGame(round);
+        history.setEnemies(enemies);
+        return history;
+    }
+
+    private Enemies getEnemies(int size) {
+        Enemies enemies = new Enemies();
+        try {
+            getWavesStatement.setInt(1, size);
+            System.out.println(getWavesStatement.toString());
+            try (ResultSet resultSet = getWavesStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String type = resultSet.getString(1);
+                    int count = resultSet.getInt(2);
+                    float interval = resultSet.getFloat(3);
+                    int hp = resultSet.getInt(4);
+                    EnemyType enemyType = EnemyType.valueOf(type.toUpperCase());
+                    Wave wave = new Wave();
+                    wave.setEnemyType(enemyType);
+                    wave.setEnemyCount(count);
+                    wave.setInterval(interval);
+                    wave.setHp(hp);
+                    enemies.addWave(wave);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return enemies;
+    }
+
+    private Round getRound(List<String> ids) {
         try {
             addIdsParameters(ids, getGameStatement);
             System.out.println(getGameStatement.toString());
@@ -108,11 +146,13 @@ public class DatabaseAdapterSingleton {
     private void addIdsParameters(List<String> ids, PreparedStatement getGameStatement) throws SQLException {
         fillAllParameter(getGameStatement);
         System.out.println(ids);
-        for (int i = 1; i < ids.size(); i++) {
-            getGameStatement.setString((2 * i) - 1, ids.get(i - 1));
-            getGameStatement.setString((2 * i), ids.get(i - 1));
+        if (ids.size() != 0) {
+            for (int i = 1; i < ids.size(); i++) {
+                getGameStatement.setString((2 * i) - 1, ids.get(i - 1));
+                getGameStatement.setString((2 * i), ids.get(i - 1));
+            }
+            getGameStatement.setString((2 * ids.size()) - 1, ids.get(ids.size() - 1));
         }
-        getGameStatement.setString((2 * ids.size()) - 1, ids.get(ids.size() - 1));
     }
 
     private void fillAllParameter(PreparedStatement preparedStatement) throws SQLException {
@@ -142,9 +182,9 @@ public class DatabaseAdapterSingleton {
         }
     }
 
-    public void addRound(List<String> ids, Round round) {
+    public synchronized void addRound(List<String> ids, Round round) {
         if (round == null) {
-            System.out.println("round was null");
+            System.out.println("Round cannot be null");
             return;
         }
         try {
