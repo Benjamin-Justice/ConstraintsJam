@@ -1,5 +1,6 @@
 package com.brutalhack.asynctd.server;
 
+import com.brutalhack.asynctd.server.model.History;
 import com.brutalhack.asynctd.server.model.Round;
 
 import javax.ws.rs.*;
@@ -17,14 +18,14 @@ public class GameResource {
     @GET
     @QueryParam("id")
     @Produces(MediaType.APPLICATION_JSON)
-    public Round getGame(@QueryParam("id") List<String> ids) {
-        return databaseAdapter.getRound(ids);
+    public History getGame(@QueryParam("id") List<String> ids) {
+        return databaseAdapter.getHistory(ids);
     }
 
-    @PUT
+    @POST
     @QueryParam("id")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addRoundPut(@QueryParam("id") List<String> ids, Round round) {
+    public void addRoundPost(@QueryParam("id") List<String> ids, Round round) {
         databaseAdapter.addRound(ids,round);
     }
 
