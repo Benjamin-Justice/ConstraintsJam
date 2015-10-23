@@ -19,7 +19,7 @@ MonoBehaviour:
   cookie: 1
   logging: 1
   status: 1
-  xfbml: 0
+  xfbml: 1
   frictionlessRequests: 1
   iosURLSuffix: 
   appLinkSchemes:

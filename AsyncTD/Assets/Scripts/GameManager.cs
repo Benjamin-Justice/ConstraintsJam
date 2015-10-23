@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Facebook.Unity;
+using System.Collections.Generic;
+using BrutalHack.AsyncTD;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,12 +10,38 @@ public class GameManager : MonoBehaviour
 	public int StartLivesAmount;
 	public int StartGoldAmount;
 	GameState gameState;
+	InitDelegate initDelegate;
+	HideUnityDelegate hideUnityDelegate;
+	OnRoundInformationReceivedDelegate onRoundInformationReceivedDelegate;
 
 	void Awake ()
 	{
-		gameState = GameState.PRESETUP;
-		Lives.OnZeroLives += Lose;
-		ResetGame ();
+		initDelegate = OnFacebookInitialized;
+		hideUnityDelegate = OnHideUnity;
+		onRoundInformationReceivedDelegate = OnRoundInformationReceived;
+		FB.Init (OnFacebookInitialized, OnHideUnity);
+	}
+
+	void OnFacebookLogin (IResult result)
+	{
+		if (result == null) {
+			Debug.Log ("Facebook Response: null?!");
+			return;
+		}
+
+		if (!string.IsNullOrEmpty (result.Error)) {
+			Debug.Log ("Facebook Response: Error");
+			Debug.Log (result.Error);
+		} else if (result.Cancelled) {
+			Debug.Log ("Facebook Response: Cancelled");
+			Debug.Log (result.RawResult);
+		} else if (!string.IsNullOrEmpty (result.RawResult)) {
+			Debug.Log ("Facebook Response: Success");
+			Debug.Log (result.RawResult);
+		} else {
+			Debug.Log ("Facebook Response: Empty");
+			Debug.Log (result.RawResult);
+		}
 	}
 
 	void ResetGame ()
@@ -23,6 +51,33 @@ public class GameManager : MonoBehaviour
 		resetTowerPositions ();
 		spawner.Reset ();
 		gameState = GameState.SETUP;
+	}
+
+	void OnFacebookInitialized ()
+	{
+		Debug.Log ("Facebook initialized");
+		gameState = GameState.PRESETUP;
+		Lives.OnZeroLives += Lose;
+		ResetGame ();
+		StartCoroutine (GameServerRestApi.TestGet (onRoundInformationReceivedDelegate));
+		StartCoroutine (GameServerRestApi.TestPost ());
+		Debug.Log ("Logged in? " + FB.IsLoggedIn);
+		var permissions = new List<string> () {
+			"public_profile",
+			"email",
+			"user_friends"
+		};
+		FB.LogInWithReadPermissions (permissions, this.OnFacebookLogin);
+	}
+
+	void OnRoundInformationReceived (RoundInformation roundInformation)
+	{
+		Debug.Log ("I have round information!");
+	}
+
+	void OnHideUnity (bool isUnityShown)
+	{
+		Debug.Log ("OnHideUnity: " + isUnityShown);
 	}
 
 	void Update ()
