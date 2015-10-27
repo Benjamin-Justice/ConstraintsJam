@@ -13,8 +13,7 @@ public class GameServerRestApi
 
 	public static IEnumerator TestGet (OnRoundInformationReceivedDelegate callback)
 	{
-		//+ idParameter + "justice"
-		string requestStatement = serverUrl + gameRequest;
+		string requestStatement = serverUrl + gameRequest + idParameter + "justice";
 		Debug.Log ("Requesting GET from: " + requestStatement);
 		WWW www = new WWW (requestStatement);
 		yield return www;
