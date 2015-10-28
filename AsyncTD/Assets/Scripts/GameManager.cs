@@ -2,6 +2,7 @@
 using Facebook.Unity;
 using System.Collections.Generic;
 using BrutalHack.AsyncTD;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
 	void OnFacebookInitialized ()
 	{
 		Debug.Log ("Facebook initialized");
+		FB.GetAppLink (StoreUrlWithParameters);
 		gameState = GameState.PRESETUP;
 		Lives.OnZeroLives += Lose;
 		ResetGame ();
@@ -68,6 +70,16 @@ public class GameManager : MonoBehaviour
 			"user_friends"
 		};
 		FB.LogInWithReadPermissions (permissions, this.OnFacebookLogin);
+	}
+
+	void StoreUrlWithParameters (IAppLinkResult result)
+	{
+		var delimiters = new char[] { '?' };
+		string[] splitUrl = result.Url.Split (delimiters, 2);
+
+		GameServerRestApi.BaseUrl = splitUrl [0];
+		GameServerRestApi.UrlParameters = splitUrl [1];
+		Debug.Log (result.Url);
 	}
 
 	void OnRoundInformationReceived (RoundInformation roundInformation)
@@ -127,7 +139,7 @@ public class GameManager : MonoBehaviour
 		gameState = GameState.FINISHED;
 		spawner.gameObject.SetActive (false);
 		foreach (Transform child in spawner.gameObject.transform) {
-			Object.Destroy (child.gameObject);
+			UnityEngine.Object.Destroy (child.gameObject);
 		}
 	}
 }
